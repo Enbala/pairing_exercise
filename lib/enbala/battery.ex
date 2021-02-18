@@ -9,7 +9,7 @@ defmodule Enbala.Battery do
   Our battery module is a little bit simpler than real-world batteries. We're only
   interested in keeping track of three things for our batteries. A unique `id`
   that we can use to send it messages, the amount of power the battery is currently
-  contributing to the grid (current_power), and what the maxim amount of power the
+  contributing to the grid (current_power), and what the maximum amount of power the
   battery could contribute to the grid (rated_power).
   """
   defstruct [:id, :current_power, rated_power: 10]
