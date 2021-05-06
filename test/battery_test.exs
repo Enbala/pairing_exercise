@@ -17,7 +17,7 @@ defmodule Enbala.BatteryTest do
   end
 
   @tag :skip
-  test ".get with an previously created id retrieves the struct" do
+  test ".get with a previously created id retrieves the struct" do
     id = "battery_1"
     Battery.create(%{id: id})
 
