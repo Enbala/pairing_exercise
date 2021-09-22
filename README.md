@@ -15,7 +15,7 @@ software. Here are some of the criteria we'll be evaluating you against:
 4. How good are you at recognizing and communicating tradeoffs?
 
 Feel free to google stuff, check reference docs, or ask for help along the way.
-Also, don't feel any pressure to finish the exercise. We'll get to where-ever
+Also, don't feel any pressure to finish the exercise. We'll get to wherever
 we get to, and that's perfectly fine.
 
 The project doesn't ship with any additional dependencies, feel free to add any

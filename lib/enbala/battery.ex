@@ -14,19 +14,15 @@ defmodule Enbala.Battery do
   """
   defstruct [:id, :current_power, rated_power: 10]
 
-  def all() do
-    []
+  def new(_params) do
+    {:error, :not_implemented}
   end
 
   def get(_id) do
     nil
   end
 
-  def create(_params) do
-    {:error, :not_implemented}
-  end
-
-  def set_current_power(_id, _power_value) do
+  def update_current_power(_id, _power_value) do
     {:error, :not_implemented}
   end
 end

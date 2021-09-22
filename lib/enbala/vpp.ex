@@ -9,6 +9,10 @@ defmodule Enbala.Vpp do
   of power to the grid.
   """
 
+  def add_asset(battery) do
+    :ok
+  end
+
   def current_power do
     0
   end
