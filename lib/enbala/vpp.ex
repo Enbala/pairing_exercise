@@ -17,6 +17,10 @@ defmodule Enbala.Vpp do
     0
   end
 
+  def batteries do
+    []
+  end
+
   def export(_power) do
     :ok
   end

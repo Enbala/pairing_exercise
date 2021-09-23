@@ -17,12 +17,6 @@ defmodule Enbala.BatteryTest do
   end
 
   @tag :skip
-  test ".get returns a previously created battery struct" do
-    {:ok, created} = Battery.new(%{id: "b1", current_power: 50, rated_power: 100})
-
-    assert Battery.get("b1") == created
-  end
-
   test ".new does basic validations" do
     # TODO: What should we do here?
     assert {:error, _} = Battery.new(%{id: nil})

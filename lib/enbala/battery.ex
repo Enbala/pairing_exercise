@@ -18,11 +18,7 @@ defmodule Enbala.Battery do
     {:error, :not_implemented}
   end
 
-  def get(_id) do
-    nil
-  end
-
-  def update_current_power(_id, _power_value) do
+  def update_current_power(_battery_struct, _power_value) do
     {:error, :not_implemented}
   end
 end
