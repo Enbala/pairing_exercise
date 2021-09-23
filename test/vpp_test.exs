@@ -6,10 +6,8 @@ defmodule Enbala.VppTest do
 
   @tag :skip
   test ".current_power returns the sum of all asset's current_power" do
-    first_battery = "battery_1"
-    Battery.new(%{id: first_battery, current_power: 8})
-    second_battery = "battery_2"
-    Battery.new(%{id: second_battery, current_power: 3})
+    {:ok, first_battery} = Battery.new(%{id: "battery_1", current_power: 8})
+    {:ok, second_battery} = Battery.new(%{id: "battery_2", current_power: 3})
 
     Vpp.add_asset(first_battery)
     Vpp.add_asset(second_battery)
@@ -19,61 +17,64 @@ defmodule Enbala.VppTest do
 
   @tag :skip
   test ".export updates assets setpoint" do
-    id = "battery_1"
-    Battery.new(%{id: id})
-    Vpp.add_asset(id)
+    {:ok, battery} = Battery.new(%{id: "battery_1"})
+    Vpp.add_asset(battery)
 
     assert Vpp.current_power() == 0
 
     Vpp.export(5)
 
-    assert %Battery{current_power: 5} = Battery.get(id)
+    [%Battery{current_power: updated_battery_power}] = Vpp.batteries()
+    assert updated_battery_power == 5
     assert Vpp.current_power() == 5
   end
 
   @tag :skip
   test ".export updates assets setpoint respecting rated_power" do
-    id = "battery_1"
-    Battery.new(%{id: id})
-    Vpp.add_asset(id)
+    {:ok, battery} = Battery.new(%{id: "battery_1"})
+    Vpp.add_asset(battery)
 
     Vpp.export(20)
 
-    assert %Battery{current_power: 10} = Battery.get(id)
+    [%Battery{current_power: updated_battery_power}] = Vpp.batteries()
+    assert updated_battery_power == 10
     assert Vpp.current_power() == 10
   end
 
   @tag :skip
   test ".export with multiple batteries disperses load across batteries" do
-    first_battery = "battery_1"
-    Battery.new(%{id: first_battery})
-    second_battery = "battery_2"
-    Battery.new(%{id: second_battery})
+    {:ok, first_battery} = Battery.new(%{id: "battery_1"})
+    {:ok, second_battery} = Battery.new(%{id: "battery_2"})
 
     Vpp.add_asset(first_battery)
     Vpp.add_asset(second_battery)
 
     Vpp.export(10)
 
-    assert %Battery{current_power: 5} = Battery.get(first_battery)
-    assert %Battery{current_power: 5} = Battery.get(second_battery)
+    [updated_battery_1, updated_battery_2] = Vpp.batteries()
+    assert updated_battery_1.current_power == 5
+    assert updated_battery_2.current_power == 5
 
     assert Vpp.current_power() == 10
   end
 
   @tag :skip
   test ".export delivers additional power to grid" do
-    first_battery = "battery_1"
-    Battery.new(%{id: first_battery, current_power: 8})
-    second_battery = "battery_2"
-    Battery.new(%{id: second_battery, current_power: 3})
+    {:ok, first_battery} = Battery.new(%{id: "battery_1", current_power: 8})
+    {:ok, second_battery} = Battery.new(%{id: "battery_2", current_power: 3})
 
     Vpp.add_asset(first_battery)
     Vpp.add_asset(second_battery)
 
     Vpp.export(2)
 
-    assert %Battery{current_power: 9} = Battery.get(first_battery)
-    assert %Battery{current_power: 4} = Battery.get(second_battery)
+    updated_batteries = Vpp.batteries()
+
+    power_values =
+      Vpp.batteries()
+      |> Enum.map(fn %Battery{current_power: p} -> p end)
+      |> Enum.sort()
+
+    assert power_values == [4, 9]
   end
 end
