@@ -68,8 +68,6 @@ defmodule Enbala.VppTest do
 
     Vpp.export(2)
 
-    updated_batteries = Vpp.batteries()
-
     power_values =
       Vpp.batteries()
       |> Enum.map(fn %Battery{current_power: p} -> p end)

@@ -30,7 +30,7 @@ defmodule Enbala.BatteryTest do
   @tag :skip
   test ".update_current_power/2" do
     {:ok, battery} = Battery.new(%{id: "b1", current_power: 100, rated_power: 1_000})
-    updated_battery = Battery.set_current_power("b1", 50)
+    updated_battery = Battery.set_current_power(battery, 50)
 
     assert updated_battery.current_power == 50
   end
