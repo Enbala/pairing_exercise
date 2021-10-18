@@ -12,7 +12,7 @@ defmodule Enbala.Vpp do
     * `export`: export an additional amount of power to the grid
   """
 
-  def add_asset(battery) do
+  def add_asset(_battery) do
     :ok
   end
 
