@@ -16,7 +16,7 @@ defmodule Enbala.VppTest do
   end
 
   @tag :skip
-  test ".export updates assets setpoint" do
+  test ".export updates asset's setpoint" do
     {:ok, battery} = Battery.new(%{id: "battery_1"})
     Vpp.add_asset(battery)
 
@@ -30,7 +30,7 @@ defmodule Enbala.VppTest do
   end
 
   @tag :skip
-  test ".export updates assets setpoint respecting rated_power" do
+  test ".export updates asset's setpoint respecting rated_power" do
     {:ok, battery} = Battery.new(%{id: "battery_1"})
     Vpp.add_asset(battery)
 
