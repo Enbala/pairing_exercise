@@ -12,7 +12,7 @@ defmodule Enbala.Vpp do
 
   """
 
-  def add_asset(_battery) do
+  def add_battery(_battery) do
     :ok
   end
 
