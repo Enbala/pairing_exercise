@@ -9,8 +9,8 @@ defmodule Enbala.VppTest do
     {:ok, first_battery} = Battery.new(%{id: "battery_1", current_power: 8})
     {:ok, second_battery} = Battery.new(%{id: "battery_2", current_power: 3})
 
-    Vpp.add_asset(first_battery)
-    Vpp.add_asset(second_battery)
+    Vpp.add_battery(first_battery)
+    Vpp.add_battery(second_battery)
 
     assert Vpp.current_power() == 11
   end
@@ -18,7 +18,7 @@ defmodule Enbala.VppTest do
   @tag :skip
   test ".export updates asset's setpoint" do
     {:ok, battery} = Battery.new(%{id: "battery_1"})
-    Vpp.add_asset(battery)
+    Vpp.add_battery(battery)
 
     assert Vpp.current_power() == 0
 
@@ -32,7 +32,7 @@ defmodule Enbala.VppTest do
   @tag :skip
   test ".export updates asset's setpoint respecting rated_power" do
     {:ok, battery} = Battery.new(%{id: "battery_1"})
-    Vpp.add_asset(battery)
+    Vpp.add_battery(battery)
 
     Vpp.export(20)
 
@@ -46,8 +46,8 @@ defmodule Enbala.VppTest do
     {:ok, first_battery} = Battery.new(%{id: "battery_1"})
     {:ok, second_battery} = Battery.new(%{id: "battery_2"})
 
-    Vpp.add_asset(first_battery)
-    Vpp.add_asset(second_battery)
+    Vpp.add_battery(first_battery)
+    Vpp.add_battery(second_battery)
 
     Vpp.export(10)
 
@@ -63,8 +63,8 @@ defmodule Enbala.VppTest do
     {:ok, first_battery} = Battery.new(%{id: "battery_1", current_power: 8})
     {:ok, second_battery} = Battery.new(%{id: "battery_2", current_power: 3})
 
-    Vpp.add_asset(first_battery)
-    Vpp.add_asset(second_battery)
+    Vpp.add_battery(first_battery)
+    Vpp.add_battery(second_battery)
 
     Vpp.export(2)
 
